@@ -1,45 +1,15 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<style>
-			<link rel="stylesheet" href="main.css">
-		</style>
-		<script>
-			function startTime() {
-				var today = new Date();
-				var h = today.getHours();
-				var m = today.getMinutes();
-				var s = today.getSeconds();
-				h = hourFormat(h);
-				m = checkTime(m);
-				s = checkTime(s);
-				document.getElementById('txt').innerHTML =
-				h + ":" + m + ":" + s;
-				var t = setTimeout(startTime, 500);
-			}
-			function hourFormat(i) {
-				if (i >12)
-					{
-						i = i -12;
-						return i;
-					}
-
-				}
-			function checkTime(i) {
-				if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-				return i;
-			}
-		</script>
-	</head>
-	<body onload="startTime()">
-		<h1> Good morning </h1>
-		<h1 id="txt"></h1>
+	<link href="./main.css" rel="stylesheet" type="text/css">
+	<body>
+		<h1 class="mainText"> Good morning </h1>
+		<h1 class="time mainText"></h1>
 		<div class="weather">
-			<p class="temperature"></p>
-			<p class ="location"></p>
+			<p class="temperature mainText"></p>
+			<p class ="location subText"></p>
 		</div>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.1.0/jquery.simpleWeather.min.js"></script>
-		<script src="main.js"></script>
+		<script src="./main.js"></script>
 	</body>
 </html>

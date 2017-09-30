@@ -1,10 +1,25 @@
 body {
-  font: 20px;
-  background: #000000;
+  background: black;
 }
 
-#weather p {
-  font: 20px;
+.mainText {
+  font-size: 60px;
   margin: 0px auto;
+  color: white;
   text-transform: uppercase;
+}
+.subText {
+  font-size: 20px;
+  margin: 0px auto;
+  color: white;
+  text-transform: uppercase;
+}
+.weather{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-right: 10px;
+}
+h1 {
+    padding-bottom: 32px;
 }
