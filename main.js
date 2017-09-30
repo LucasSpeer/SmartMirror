@@ -1,16 +1,23 @@
-
-$(document).ready(function() {
+$(document).ready(function() { 
+	loadWeather('55318');
+	navigator.geolocation.getCurrentPosition(function(position) {
+		setInterval(function(position){loadWeather(position.coords.latitude+','+position.coords.longitude);}, 1000);
+	});
+});
+function loadWeather(location) {
   $.simpleWeather({
-    location: 'Austin, TX',
-    woeid: '',
+    location: location,
     unit: 'f',
     success: function(weather) {
-      html = '<p>'+weather.temp+'&deg;'+weather.units.temp+'</p>';
+      temp = weather.temp+'&deg;';
+      city = weather.city+', '+weather.region;
   
-      $("#weather").html(html);
+      $(".location").text(city);
+      $(".temperature").html(temp);
     },
     error: function(error) {
-      $("#weather").html('<p>'+error+'</p>');
+      $(".location").text("Chaska, MN");
+      $(".temperature").html("69 f");
     }
   });
-});
+}
