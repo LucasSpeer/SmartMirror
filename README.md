@@ -5,8 +5,10 @@ Lucas Speer and Isaac Matzke's Senior design project
 A Local website hosted on a raspberry pi Running behind a 2-way mirror
 
 Current Features:
-Time
-weather w/ geolocation
+	
+    Time
+
+    weather w/ geolocation
 
 Possible future additions
 
