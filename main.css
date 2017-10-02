@@ -1,18 +1,18 @@
 body {
-  background: black;
+    background: black;
 }
 
 .mainText {
-  font-size: 60px;
-  margin: 0px auto;
-  color: white;
-  text-transform: uppercase;
+    font-size: 60px;
+    margin: 0px auto;
+    color: white;
+    text-transform: uppercase;
 }
 .subText {
-  font-size: 20px;
-  margin: 0px auto;
-  color: white;
-  text-transform: uppercase;
+    font-size: 20px;
+    margin: 0px auto;
+    color: white;
+    text-transform: uppercase;
 }
 .weather{
     position: absolute;
@@ -22,4 +22,9 @@ body {
 }
 h1 {
     padding-bottom: 32px;
+}
+.greeting{
+    font-size: 80px;
+    margin: 0px auto;
+    color: white;
 }

@@ -1,16 +1,15 @@
 /*globals $:false */
-function loadWeather(location) {
-    'use strict';
+function loadWeather (location) {
     $.simpleWeather({
         location: location,
         unit: 'f',
-        success: function (weather) {
+        success: function(weather) {
             var temp = weather.temp + '&deg;',
                 city = weather.city + ', ' + weather.region;
             $(".location").text(city);
             $(".temperature").html(temp);
         },
-        error: function (error) {
+        error: function(error) {
             $(".location").text("Chaska, MN");
             $(".temperature").html("69 f");
         }
@@ -39,23 +38,24 @@ function startTime() {
     'use strict';
     var today = new Date(),
         h = hourFormat(today.getHours()),
-        m = checkTime(today.getMinutes());
-        //t = setTimeout(startTime, 500);
+        m = checkTime(today.getMinutes()),
+        t = setTimeout(startTime, 500);
     $(".time").html(h + ":" + m);
 }
-$(document).ready(function () {
+$(document).ready(function() {
     'use strict';
-    loadWeather("56001", '');
-    navigator.geolocation.getCurrentPosition(function (position) {
+    //loadWeather("56001", '');
+    navigator.geolocation.getCurrentPosition(function(position) {
         var lat = position.coords.latitude,
             lon = position.coords.longitude,
             pos = lat + ',' + lon;
         loadWeather(pos);
     });
-    setInterval(function () {
-        navigator.geolocation.getCurrentPosition(function (position) {
-	        loadWeather(position.coords.latitude + ',' + position.coords.longitude);
+    
+    setInterval(function() {
+        navigator.geolocation.getCurrentPosition(function(position) {
+	       loadWeather(position.coords.latitude + ',' + position.coords.longitude); 
         });
-    }, 1000); //update weather every this many ms
+    }, 10000); //update weather every this many ms
     startTime();
 });
