@@ -5,14 +5,10 @@ body {
 .mainText {
     font-size: 60px;
     margin: 0px auto;
-    color: white;
-    text-transform: uppercase;
 }
 .subText {
     font-size: 20px;
     margin: 0px auto;
-    color: white;
-    text-transform: uppercase;
 }
 .weather{
     position: absolute;
@@ -21,10 +17,15 @@ body {
     padding-right: 10px;
 }
 h1 {
-    padding-bottom: 32px;
+    padding-bottom: 16px;
 }
 .greeting{
     font-size: 80px;
     margin: 0px auto;
-    color: white;
+}
+.mainText,
+.subText,
+.greeting{
+	color: white;
+	font-family: Arial;
 }

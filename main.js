@@ -6,12 +6,14 @@ function loadWeather(location) {
         unit: 'f',
         success: function (weather) {
             var temp = weather.temp + '&deg;',
+				forecast = weather.forecast[3].text,
                 city = weather.city + ', ' + weather.region;
-            $(".location").text(city);
+            $(".location").text(city);			//assign .location class the text in city
             $(".temperature").html(temp);
+			$(".forecast").text(forecast);
         },
         error: function (error) {
-            $(".location").text("Chaska, MN");
+            $(".location").text("Mankato, MN");
             $(".temperature").html("69 f");
         }
     });
@@ -54,7 +56,7 @@ $(document).ready(function () {
     });
     setInterval(function () {
         navigator.geolocation.getCurrentPosition(function (position) {
-	        loadWeather(position.coords.latitude + ',' + position.coords.longitude);
+			loadWeather(position.coords.latitude + ',' + position.coords.longitude);
         });
     }, 1000); //update weather every this many ms
     startTime();
