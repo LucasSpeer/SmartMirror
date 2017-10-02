@@ -39,8 +39,8 @@ function startTime() {
     'use strict';
     var today = new Date(),
         h = hourFormat(today.getHours()),
-        m = checkTime(today.getMinutes());
-        //t = setTimeout(startTime, 500);
+        m = checkTime(today.getMinutes()),
+        t = setTimeout(startTime, 500);
     $(".time").html(h + ":" + m);
 }
 $(document).ready(function () {
