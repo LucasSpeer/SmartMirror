@@ -10,6 +10,8 @@ Current Features:
     
     weather w/ geolocation
 
+    Time-Dynamic greeting
+
 Possible future additions:
 
     app configuration
@@ -21,3 +23,5 @@ Possible future additions:
     auto-dim
     
     synchronized automation with modules (lights, coffee maker, etc)
+
+The /BTMirror-app/ and /pythonscripts/ repositories will eventually be integrated into this one. 
