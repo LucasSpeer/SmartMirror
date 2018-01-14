@@ -1,0 +1,31 @@
+body {
+    background: black;
+}
+
+.mainText {
+    font-size: 60px;
+    margin: 0px auto;
+}
+.subText {
+    font-size: 20px;
+    margin: 0px auto;
+}
+.weather{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-right: 10px;
+}
+h1 {
+    padding-bottom: 16px;
+}
+.greeting{
+    font-size: 80px;
+    margin: 0px auto;
+}
+.mainText,
+.subText,
+.greeting{
+	color: white;
+	font-family: Arial;
+}
