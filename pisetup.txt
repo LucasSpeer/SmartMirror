@@ -1,0 +1,7 @@
+Run the following commands in order to set up a smartmirror
+
+sudo apt-get update
+sudo apt-get install python-pip python-dev ipython
+sudo apt-get install bluetooth libbluetooth-dev
+sudo pip install pybluez
+sudo git clone https://github.com/LucasSpeer/SeniorDesignSmartMirror.git

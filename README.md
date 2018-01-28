@@ -12,9 +12,9 @@ Current Features:
 
     Time-Dynamic greeting
 
-Possible future additions:
+    App configuration via bluetooth(debug in progress)
 
-    app configuration
+Possible future additions:
     
     voice activation
     
@@ -24,4 +24,4 @@ Possible future additions:
     
     synchronized automation with modules (lights, coffee maker, etc)
 
-The /BTMirror-app/ and /pythonscripts/ repositories will eventually be integrated into this one. 
+Follow the commands outlined in pisetup.txt to setup your pi to function as a SmartMirror
