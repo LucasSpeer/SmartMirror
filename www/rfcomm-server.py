@@ -9,7 +9,7 @@ from bluetooth import *
 # Set up the bluetooth socket as a server
 server_sock=BluetoothSocket( RFCOMM )
 server_sock.bind(("",PORT_ANY))
-server_sock.listen(12)
+server_sock.listen(1)
 
 port = server_sock.getsockname()[1]
 # Must be the same as the Android app
@@ -22,35 +22,13 @@ advertise_service( server_sock, "SmartMirror",
 #                   protocols = [ OBEX_UUID ] 
                     )
                     
-setFile = open('settings.json', 'r+')
-tmpfile = setFile
-setString = setFile.read()
-layoutStr = ""
-settStr = ""
-
-#A function to read the strings from the setting file, used in the main loop to make sure both have their correct value
-def getStrings():
-	tmpStr = ""
-	layoutStr = ""
-	settStr = ""
-	while "}" not in tmpStr:
-		tmpStr = setFile.readline()
-		layoutStr += tmpStr
-		
-	while "}" not in tmpStr:
-		tmpStr = setFile.readline()
-		settStr += tmpStr
-		
-def dataHandler(data):
-	tmpfile = setFile
-	if data.startswith("{\nl1"):
-		 layoutStr = data
 	
-	else:
-		settStr = data
-		
-	dataStr = layoutStr + settStr
-	setFile.write(dataStr)
+def dataHandler(data):
+	setFile = open('config.json', 'w')
+	setFile.write(data)			#Overrite any data with as neccesarry and save
+	print(data)
+	data = ""
+	setFile.close()
 	
 while True:                   
 	print("Waiting for connection on RFCOMM channel %d" % port)
@@ -62,8 +40,7 @@ while True:
 		while True:
 			data = client_sock.recv(1024)
 			if len(data) == 0: break
-			getStrings()				#call this before dataHandler to read previously saved data
-			dataHandler(data)			#Overrite any data with as neccesarry and save
+			dataHandler(data)
 	except IOError:
 		pass
 
