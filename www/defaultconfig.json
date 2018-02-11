@@ -1,0 +1,23 @@
+{
+"layout":
+	{
+	"l1": "greeting",
+	"l2": "time",
+	"l3": "",
+	"r1": "weather",
+	"r2": "",
+	"r3": ""
+	},
+"weather":
+	{
+	"useC": false,
+	"zipcode": "56001"
+	},
+"general":
+	{
+	"military": false,
+	"showSec": false,
+	"color": "white",
+	"size": 500
+	}
+}
