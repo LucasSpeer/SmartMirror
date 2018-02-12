@@ -1,14 +1,27 @@
 Run the following commands in order to set up a smartmirror
 
+
+
+one time:
+
 sudo apt-get update
 sudo apt-get install python-pip python-dev ipython
 sudo apt-get install bluetooth libbluetooth-dev
 sudo apt-get install bluez bluez-util minicom
 sudo pip install pybluez
 sudo git clone https://github.com/LucasSpeer/SmartMirror.git
-change line in /etc/systemd/system/dbus-org.bluez.service to ExecStart=/usr/lib/bluetooth/bluetoothd --compat
 sudo chmod 777 /var/run/sdp
+cd ~/SmartMirror/lib/
+sudo cp rfcomm.conf main.conf /etc/bluetooth/
+sudo cp machine-info /etc/
+sudo cp panel /home/pi/.config/lxpanel/LXDE-pi/panels/
+sudo cp dbus-org.bluez.service /etc/systemd/system/
+sudo python ~/SmartMirror/lib/rfcommset.py
 
-BT commands
+
+Startup commands:
+
+sudo hciconfig hci0 up
 sudo hciconfig hci0 piscan
-sudo hciconfig hci0 auth
+sudo python ~/SmartMirror/lib/simple-agent &
+sudo python ~/SmartMirror/lib/rfcomm-server.py &
