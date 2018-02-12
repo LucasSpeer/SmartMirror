@@ -8,3 +8,7 @@ sudo pip install pybluez
 sudo git clone https://github.com/LucasSpeer/SmartMirror.git
 change line in /etc/systemd/system/dbus-org.bluez.service to ExecStart=/usr/lib/bluetooth/bluetoothd --compat
 sudo chmod 777 /var/run/sdp
+
+BT commands
+sudo hciconfig hci0 piscan
+sudo hciconfig hci0 auth
