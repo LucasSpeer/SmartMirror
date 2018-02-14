@@ -16,6 +16,7 @@ sudo cp rfcomm.conf main.conf /etc/bluetooth/
 sudo cp machine-info /etc/
 sudo cp panel /home/pi/.config/lxpanel/LXDE-pi/panels/
 sudo cp dbus-org.bluez.service /etc/systemd/system/
+sudo hciconfig hci0 | grep Address | sudo nano addr  //creates te file addr.save with a line containing the local BT MAC addresshci
 sudo python ~/SmartMirror/lib/rfcommset.py
 
 
