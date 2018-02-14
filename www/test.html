@@ -15,7 +15,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.1.0/jquery.simpleWeather.min.js"></script>
 	<script>
-		var spots = ["l1","r1","l1","r2","l3","r3"];
+		var spots = ["#l1","#r1","#l1","#r2","#l3","#r3"];
+		var weatherDiv = document.createElement( "div");
+		var weatherElem = weatherDiv.get( 0 );
 		function readTextFile(file,mystring)
 		{
 			var rawFile = new XMLHttpRequest();
@@ -34,18 +36,21 @@
 			rawFile.send(null);
 		}
 		function assignSpots(config){
-			spots[0] = config.layout.l1;
+			/*spots[0] = config.layout.l1;
 			spots[1] = config.layout.r1;
 			spots[2] = config.layout.l2;
 			spots[3] = config.layout.r2;
 			spots[4] = config.layout.l3;
 			spots[5] = config.layout.r3;
-			$("#l1").addClass(spots[0]);
-			$("#r1").addClass(spots[1]);
-			$("#l2").addClass(spots[2]);
-			$("#r2").addClass(spots[3]);
-			$("#l3").addClass(spots[4]);
-			$("#r3").addClass(spots[5]);
+			*/
+			for(int i = 0; i < 6; i++){
+				var elements[i] = $(spots[i]);
+				if(spots[i].equals("weather")){
+					$(spots[i]).appendChild("<p></p>").addClass("temperature mainText");
+					$(spots[i]).appendChild("<p></p>").addClass("forecast subText");
+					$(spots[i]).appendChild("<p></p>").addClass("locatian subText");
+				}
+			}
 		}
 		$( document ).ready(function () {
 			'use strict';
