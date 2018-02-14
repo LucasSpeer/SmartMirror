@@ -5,17 +5,25 @@
 			<meta charset="utf-8"/>
      	</head>
 	<body>
-		<p id="l1">l1</p>
-		<p id="r1">r1</p>
-		<p id="l2">l2</p>
-		<p id="r2">r2</p>
-		<p id="l3">l3</p>
-		<p id="r3">r3</p>
+		<div class="grid">
+			<div class="l1">l1</div>
+			<div class="r1">r1</div>
+			<div class="l2">l2</div>
+			<div class="r2">r2</div>
+			<div class="l3">l3</div>
+			<div class="r3">r3</div>
+		</div>
 	</body>
+	<div class="weatherContainer">
+			<p class="temperature mainText"></p>
+			<p class="forecast subText"></p>
+			<p class ="location subText"></p>
+	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.1.0/jquery.simpleWeather.min.js"></script>
 	<script>
-		var spots = ["l1","r1","l1","r2","l3","r3"];
+		var spots = [".l1",".r1",".l2",".r2",".l3",".r3"];
+		
 		function readTextFile(file,mystring)
 		{
 			var rawFile = new XMLHttpRequest();
@@ -34,18 +42,17 @@
 			rawFile.send(null);
 		}
 		function assignSpots(config){
-			spots[0] = config.layout.l1;
-			spots[1] = config.layout.r1;
-			spots[2] = config.layout.l2;
-			spots[3] = config.layout.r2;
-			spots[4] = config.layout.l3;
-			spots[5] = config.layout.r3;
-			$("#l1").addClass(spots[0]);
-			$("#r1").addClass(spots[1]);
-			$("#l2").addClass(spots[2]);
-			$("#r2").addClass(spots[3]);
-			$("#l3").addClass(spots[4]);
-			$("#r3").addClass(spots[5]);
+			$(spots[0]).addClass(config.layout.l1);
+			$(spots[1]).addClass(config.layout.r1);
+			$(spots[2]).addClass(config.layout.l2);
+			$(spots[3]).addClass(config.layout.r2);
+			$(spots[4]).addClass(config.layout.l3);
+			$(spots[5]).addClass(config.layout.r3);
+			var weatherSpot = $( ".Weather" );
+			weatherSpot.text("");
+			weatherSpot.append( $( ".weatherContainer" ));
+			var emptySpots = $( ".None" );
+			emptySpots.detach();
 		}
 		$( document ).ready(function () {
 			'use strict';
@@ -58,3 +65,4 @@
 	</script>
 	<script src="./test.js"></script>
 </html> 
+

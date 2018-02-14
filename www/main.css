@@ -1,7 +1,10 @@
 body {
     background: black;
 }
-
+.grid {
+	display: grid;
+    grid-template-columns: 50% 50%;
+}
 .mainText {
     font-size: 60px;
     margin: 0px auto;
@@ -19,24 +22,31 @@ body {
 h1 {
     padding-bottom: 16px;
 }
-.greeting{
+.Greeting{
     font-size: 80px;
     margin: 0px auto;
 }
-#l1,
-#l2,
-#l3{
+.l1,
+.l2,
+.l3{
 	text-align: left;
+	justify-self: start;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	
 }
-#r1,
-#r2,
-#r3{
-	text-align: right
+.r1,
+.r2,
+.r3{
+	text-align: right;
+	justify-self: end;
+	z-index: -1;
+	grid-column-start: 2;
 }
 .none{
 	color: black !important;
 }
-p{
+div{
 	color: white;
 }
 .mainText,
