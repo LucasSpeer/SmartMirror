@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<link href="./main.css" rel="stylesheet" type="text/css">
+		<head>
+			<meta charset="utf-8"/>
+     	</head>
+	<body>
+		<p id="l1">l1</p>
+		<p id="r1">r1</p>
+		<p id="l2">l2</p>
+		<p id="r2">r2</p>
+		<p id="l3">l3</p>
+		<p id="r3">r3</p>
+	</body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.1.0/jquery.simpleWeather.min.js"></script>
+	<script>
+		var spots = ["#l1","#r1","#l1","#r2","#l3","#r3"];
+		var weatherDiv = document.createElement( "div");
+		var weatherElem = weatherDiv.get( 0 );
+		function readTextFile(file,mystring)
+		{
+			var rawFile = new XMLHttpRequest();
+			rawFile.open("GET", file, false);
+			rawFile.onreadystatechange = function ()
+			{
+				if(rawFile.readyState === 4)
+				{
+					if(rawFile.status === 200)
+					{
+						var allText = rawFile.responseText;
+						mystring.contents += allText;
+					}
+				}
+			}
+			rawFile.send(null);
+		}
+		function assignSpots(config){
+			/*spots[0] = config.layout.l1;
+			spots[1] = config.layout.r1;
+			spots[2] = config.layout.l2;
+			spots[3] = config.layout.r2;
+			spots[4] = config.layout.l3;
+			spots[5] = config.layout.r3;
+			*/
+			for(int i = 0; i < 6; i++){
+				var elements[i] = $(spots[i]);
+				if(spots[i].equals("weather")){
+					$(spots[i]).appendChild("<p></p>").addClass("temperature mainText");
+					$(spots[i]).appendChild("<p></p>").addClass("forecast subText");
+					$(spots[i]).appendChild("<p></p>").addClass("locatian subText");
+				}
+			}
+		}
+		$( document ).ready(function () {
+			'use strict';
+			var mytext = {contents: ""};
+			readTextFile("http://localhost/config.json",mytext);
+			//var unparsedconfig = '{ "weather":false, "time":true, "greeting":true}';
+			var config = JSON.parse(mytext.contents);
+			assignSpots(config);
+		});
+	</script>
+	<script src="./test.js"></script>
+</html> 
