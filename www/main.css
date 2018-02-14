@@ -36,7 +36,9 @@ h1 {
 .none{
 	color: black !important;
 }
-p,
+p{
+	color: white;
+}
 .mainText,
 .subText,
 .greeting{

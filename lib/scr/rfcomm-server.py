@@ -6,6 +6,7 @@
 # $Id: rfcomm-server.py 518 2007-08-10 07:20:07Z albert $
 
 from bluetooth import *
+
 # Set up the bluetooth socket as a server
 server_sock=BluetoothSocket( RFCOMM )
 server_sock.bind(("",PORT_ANY))
