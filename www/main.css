@@ -23,6 +23,20 @@ h1 {
     font-size: 80px;
     margin: 0px auto;
 }
+#l1,
+#l2,
+#l3{
+	text-align: left;
+}
+#r1,
+#r2,
+#r3{
+	text-align: right
+}
+.none{
+	color: black !important;
+}
+p,
 .mainText,
 .subText,
 .greeting{
