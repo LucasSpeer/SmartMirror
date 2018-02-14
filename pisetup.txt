@@ -12,7 +12,7 @@ sudo pip install pybluez
 sudo git clone https://github.com/LucasSpeer/SmartMirror.git
 sudo chmod 777 /var/run/sdp
 cd ~/SmartMirror/lib/
-sudo cp rfcomm.conf main.conf /etc/bluetooth/
+sudo cp main.conf /etc/bluetooth/
 sudo cp machine-info /etc/
 sudo cp panel /home/pi/.config/lxpanel/LXDE-pi/panels/
 sudo cp dbus-org.bluez.service /etc/systemd/system/

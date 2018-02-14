@@ -1,5 +1,0 @@
-{ 
-	"weather":	true, 
-	"time":		true, 
-	"greeting":	true
-}
