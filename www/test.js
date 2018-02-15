@@ -48,14 +48,22 @@ function Greeting(config)
 		{greeting.text("Good Morning");}
 
 }
+function removeModules(spot){
+	$(spot).removeClass("None");
+	$(spot).removeClass("Weather");
+	$(spot).removeClass("Greeting");
+	$(spot).removeClass("Time");
+	$(spot).removeClass("Email");
+	$(spot).removeClass("News");
+	//$(spot).removeClass("");
+}
 function assignSpots(config){
 			var spots = [".l1",".r1",".l2",".r2",".l3",".r3"];
 			//assign each spot it's module from config.JSON
 			for(var i = 0; i < 6; i++){
-				$(spots[i]).removeClass("None");
-				$(spots[i]).removeClass("Weather");
+				removeModules(spots[i]);		//clear all module classes
 			}
-			$(spots[0]).addClass(config.layout.l1);
+			$(spots[0]).addClass(config.layout.l1);		
 			$(spots[1]).addClass(config.layout.r1);
 			$(spots[2]).addClass(config.layout.l2);
 			$(spots[3]).addClass(config.layout.r2);
