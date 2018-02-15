@@ -102,6 +102,6 @@ $( document ).ready(function () {
 		var emptySpots = $( ".None" );
 		emptySpots.text("");
 		$( ".Time" ).addClass( "mainText" );
-	}, 2000); //Update everything but time(handled in time js) every 2 seconds
+	}, 1000); //Update everything but time(handled in time js) every second
 });
 
