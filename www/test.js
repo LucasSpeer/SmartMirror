@@ -1,9 +1,9 @@
 /*globals $:false */
-function loadWeather(location) {
+function loadWeather(location, ForC) {
     'use strict';
-    $.simpleWeather({
+	$.simpleWeather({
         location: location,
-        unit: 'f',
+        unit: ForC,
         success: function (weather) {
             var temp = weather.temp + '&deg;',
 				forecast = weather.forecast[3].text,
@@ -54,13 +54,20 @@ function update(){
 	var config = JSON.parse(mytext.contents);		//get a JSON array from the raw file contents
 	var zip = config.weather.zipcode;		//get zipcode for loadweather()
 	Greeting(config);		//set dynamic greeting
-	loadWeather(zip);		//set weather
+	var ForC;
+	if(config.weather.useC === true){
+		ForC = 'c';
+	}
+	else{
+		ForC = 'f';
+	}
+	loadWeather(zip,ForC);		//set weather
 }
 $( document ).ready(function () {
 	'use strict'
-	update();//the initial execution is required because set interval will wait 10 seconds before executing for the first time
+	update();//the initial execution is required because set interval will wait before executing for the first time
 	setInterval(function () {
 		update();
-	}, 10000); //Update everything but time(handled in time js) every 10 seconds
+	}, 2000); //Update everything but time(handled in time js) every 2 seconds
 });
 
