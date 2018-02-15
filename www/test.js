@@ -87,17 +87,29 @@ function update(config, zip){
 	loadWeather(zip)
 }
 $( document ).ready(function () {
+<<<<<<< HEAD
 	'use strict'
 	var mytext = {contents: ""};
+=======
+	var zip = $("#zip").text(),
+		i = 0;
+	 mytext = {contents: ""};
+>>>>>>> 8b48d1093aa312087f26a91c9a1b50fd5c730209
 	readTextFile("http://localhost/config.json",mytext);
 	var config = JSON.parse(mytext.contents);
 	var zip = config.weather.zipcode;
 	update(config, zip);
 	setInterval(function () {
-					update(config, zip);
-					setInterval(function () {
-						Time(config)
-					}, 500); //update time every this many ms
-				}, 10000); //update everything else every 1 minute
+		i++;			
+		if(i%2 == 1){
+			//update time every second
+			Time(config);
+		}
+		if(i == 120){
+			//update everything else every 1 minute
+			update(config, zip);
+			i=0;
+		}
+	}, 500); //increment i every 500ms
 });
 
