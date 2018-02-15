@@ -26,7 +26,7 @@ h1 {
 	justify-self: start;
 	grid-column-start: 1;
 	grid-column-end: 2;
-	
+	align-self: start;
 }
 .r1,
 .r2,
@@ -35,6 +35,7 @@ h1 {
 	justify-self: end;
 	z-index: -1;
 	grid-column-start: 2;
+	align-self: start;
 }
 .none{
 	color: black !important;

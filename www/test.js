@@ -87,10 +87,11 @@ function update(config, zip){
 	loadWeather(zip)
 }
 $( document ).ready(function () {
-	var zip = $("#zip").text();
+	'use strict'
 	var mytext = {contents: ""};
 	readTextFile("http://localhost/config.json",mytext);
 	var config = JSON.parse(mytext.contents);
+	var zip = config.weather.zipcode;
 	update(config, zip);
 	setInterval(function () {
 					update(config, zip);

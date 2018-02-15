@@ -19,7 +19,6 @@
 			<p class="forecast subText"></p>
 			<p class ="location subText"></p>
 	</div>
-	<p id="zip"></p>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.1.0/jquery.simpleWeather.min.js"></script>
 	<script>
@@ -37,6 +36,7 @@
 			weatherSpot.append( $( ".weatherContainer" ));
 			var emptySpots = $( ".None" );
 			emptySpots.detach();
+			$( ".Time" ).addClass( "mainText" );
 		}
 		$( document ).ready(function () {
 			'use strict';
@@ -44,7 +44,6 @@
 			var mytext = {contents: ""};
 			readTextFile("http://localhost/config.json",mytext);
 			var config = JSON.parse(mytext.contents);
-			$( "#zip" ).text(config.weather.zipcode);
 			assignSpots(config);
 		});		
 	</script>
