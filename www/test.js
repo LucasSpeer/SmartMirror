@@ -88,9 +88,6 @@ function update(config, zip){
 }
 $( document ).ready(function () {
 	var zip = $("#zip").text();
-<<<<<<< HEAD
-	loadWeather(zip);
-=======
 	var mytext = {contents: ""};
 	readTextFile("http://localhost/config.json",mytext);
 	var config = JSON.parse(mytext.contents);
@@ -101,6 +98,5 @@ $( document ).ready(function () {
 						Time(config)
 					}, 500); //update time every this many ms
 				}, 10000); //update everything else every 1 minute
->>>>>>> 0b4aa78e3f5002890cd10a5a566f98d37116e0b3
 });
 
