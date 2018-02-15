@@ -48,11 +48,26 @@ function Greeting(config)
 		{greeting.text("Good Morning");}
 
 }
+function assignSpots(config){
+			var spots = [".l1",".r1",".l2",".r2",".l3",".r3"];
+			//assign each spot it's module from config.JSON
+			for(var i = 0; i < 6; i++){
+				$(spots[i]).removeClass("None");
+				$(spots[i]).removeClass("Weather");
+			}
+			$(spots[0]).addClass(config.layout.l1);
+			$(spots[1]).addClass(config.layout.r1);
+			$(spots[2]).addClass(config.layout.l2);
+			$(spots[3]).addClass(config.layout.r2);
+			$(spots[4]).addClass(config.layout.l3);
+			$(spots[5]).addClass(config.layout.r3);
+		}
 function update(){
 	var mytext = {contents: ""};
 	readTextFile("http://localhost/config.json",mytext);		//read config file every time in case of changes
 	var config = JSON.parse(mytext.contents);		//get a JSON array from the raw file contents
 	var zip = config.weather.zipcode;		//get zipcode for loadweather()
+	assignSpots(config);
 	Greeting(config);		//set dynamic greeting
 	var ForC;
 	if(config.weather.useC === true){
@@ -66,8 +81,19 @@ function update(){
 $( document ).ready(function () {
 	'use strict'
 	update();//the initial execution is required because set interval will wait before executing for the first time
+	var weatherSpot = $( ".Weather" );
+	weatherSpot.text("");
+	weatherSpot.append( $( ".weatherContainer" ));
+	var emptySpots = $( ".None" );
+	emptySpots.text("");
+	$( ".Time" ).addClass( "mainText" );
 	setInterval(function () {
 		update();
+		var weatherSpot = $( ".Weather" );
+		weatherSpot.append( $( ".weatherContainer" ));
+		var emptySpots = $( ".None" );
+		emptySpots.text("");
+		$( ".Time" ).addClass( "mainText" );
 	}, 2000); //Update everything but time(handled in time js) every 2 seconds
 });
 
