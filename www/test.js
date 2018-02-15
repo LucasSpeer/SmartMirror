@@ -19,5 +19,6 @@ function loadWeather(location) {
     });
 }
 $( document ).ready(function () {
-	loadWeather('56001');
+	var zip = $("#zip").text();
+	loadWeather(zip);
 });

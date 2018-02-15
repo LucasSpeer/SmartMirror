@@ -19,11 +19,10 @@
 			<p class="forecast subText"></p>
 			<p class ="location subText"></p>
 	</div>
+	<p id="zip"></p>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.1.0/jquery.simpleWeather.min.js"></script>
 	<script>
-		var spots = [".l1",".r1",".l2",".r2",".l3",".r3"];
-		
 		function readTextFile(file,mystring)
 		{
 			var rawFile = new XMLHttpRequest();
@@ -42,12 +41,16 @@
 			rawFile.send(null);
 		}
 		function assignSpots(config){
+			var spots = [".l1",".r1",".l2",".r2",".l3",".r3"];
+			#assign each spot it's module from config.JSON
 			$(spots[0]).addClass(config.layout.l1);
 			$(spots[1]).addClass(config.layout.r1);
 			$(spots[2]).addClass(config.layout.l2);
 			$(spots[3]).addClass(config.layout.r2);
 			$(spots[4]).addClass(config.layout.l3);
 			$(spots[5]).addClass(config.layout.r3);
+			#Get zipcode and store it in an invisible html object with id "zip"
+			$( "#zip" ).text(config.weather.zipcode);
 			var weatherSpot = $( ".Weather" );
 			weatherSpot.text("");
 			weatherSpot.append( $( ".weatherContainer" ));
