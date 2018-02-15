@@ -5,7 +5,7 @@ function loadWeather(location, ForC) {
         location: location,
         unit: ForC,
         success: function (weather) {
-            var temp = weather.temp + '&deg;',
+            var temp = weather.temp + '&deg;' + ForC.toUpperCase(),
 				forecast = weather.forecast[3].text,
                 city = weather.city + ', ' + weather.region;
             $(".location").text(city);			//assign .location class the text in city
