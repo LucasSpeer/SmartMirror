@@ -1,12 +1,12 @@
 {
 "layout":
 	{
-	"l1": "greeting",
-	"l2": "time",
-	"l3": "",
-	"r1": "weather",
-	"r2": "",
-	"r3": ""
+	"l1": "Greeting",
+	"l2": "Time",
+	"l3": "None",
+	"r1": "Weather",
+	"r2": "None",
+	"r3": "None"
 	},
 "weather":
 	{

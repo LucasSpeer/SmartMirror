@@ -18,6 +18,7 @@ h1 {
 }
 .Greeting{
     font-size: 80px;
+	font-family: Arial;
 }
 .l1,
 .l2,
@@ -47,7 +48,7 @@ div{
 }
 .mainText,
 .subText,
-.greeting{
+.Greeting{
 	color: white;
 	font-family: Arial;
 }

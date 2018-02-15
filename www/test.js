@@ -35,39 +35,6 @@ function readTextFile(file,mystring)
 	}
 	rawFile.send(null);
 }
-function Time(config)
-{
-	var time = $(".Time");
-	var today = new Date();
-	//t = setTimeout(startTime, 500);
-	var hours = today.getHours();
-	var minutes = today.getMinutes();
-	if (minutes < 10)
-	{
-		minutes = "0" + minutes;
-	}
-	if (config.general.military === false)
-	{
-		if (hours > 12)
-		{
-			hours = hours - 12;
-		}
-	}
-	
-	if (config.general.military === false)
-	{
-		if (today.getHours() <= 12)
-		{
-			str = str + "am";
-		}
-		else
-		{
-			str = str + "pm";
-		}
-	}
-	var str = hours + ":" + minutes;
-	time.text(str);
-}
 function Greeting(config)
 {
 	var greeting = $(".Greeting");
@@ -81,30 +48,19 @@ function Greeting(config)
 		{greeting.text("Good Morning");}
 
 }
-function update(config, zip){
-	Greeting(config);
-	Time(config)
-	loadWeather(zip)
+function update(){
+	var mytext = {contents: ""};
+	readTextFile("http://localhost/config.json",mytext);		//read config file every time in case of changes
+	var config = JSON.parse(mytext.contents);		//get a JSON array from the raw file contents
+	var zip = config.weather.zipcode;		//get zipcode for loadweather()
+	Greeting(config);		//set dynamic greeting
+	loadWeather(zip);		//set weather
 }
 $( document ).ready(function () {
 	'use strict'
-	var mytext = {contents: ""};
-	var i = 0;
-	readTextFile("http://localhost/config.json",mytext);
-	var config = JSON.parse(mytext.contents);
-	var zip = config.weather.zipcode;
-	update(config, zip);
+	update();//the initial execution is required because set interval will wait 10 seconds before executing for the first time
 	setInterval(function () {
-		i++;			
-		if(i%2 == 1){
-			//update time every second
-			Time(config);
-		}
-		if(i == 120){
-			//update everything else every 1 minute
-			update(config, zip);
-			i=0;
-		}
-	}, 500); //increment i every 500ms
+		update();
+	}, 10000); //Update everything but time(handled in time js) every 10 seconds
 });
 
