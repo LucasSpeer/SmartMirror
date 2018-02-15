@@ -1,5 +1,8 @@
 #!/bin/sh
-
+cd /home/pi/SmartMirror/
+sudo git pull
+cd /home/pi/SmartMirror www/
+./saveToServer.sh
 cd /home/pi/SmartMirror/lib/scr/
 sudo hciconfig hci0 up
 sudo hciconfig hci0 piscan &
