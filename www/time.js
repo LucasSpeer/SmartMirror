@@ -9,26 +9,29 @@ function time()
 	//t = setTimeout(startTime, 500);
 	var hours = today.getHours();
 	var minutes = today.getMinutes();
+	var seconds = today.getSeconds();
 	if (minutes < 10)
 	{
 		minutes = "0" + minutes;
 	}
-	if (config.general.military === false)
-	{
+	if(seconds < 10){
+		seconds = "0" + seconds;
+	}
+	if (config.general.military === false){
 		if (hours > 12)
 		{
 			hours = hours - 12;
 		}
 	}
 	var str = hours + ":" + minutes;
-	if (config.general.military === false)
-	{
-		if (today.getHours() <= 12)
-		{
+	if (config.general.showSec === true){
+		str = str + ":" + seconds;
+	}
+	if (config.general.military === false){
+		if (today.getHours() <= 12){
 			str = str + "AM";
 		}
-		else
-		{
+		else{
 			str = str + "PM";
 		}
 	}

@@ -7,13 +7,13 @@ one time:
 sudo apt-get update
 sudo apt-get install python-pip python-dev ipython
 sudo apt-get install bluetooth libbluetooth-dev
-sudo apt-get install bluez bluez-util minicom
+sudo apt-get install bluez bluez-util apache2
 sudo pip install pybluez
 sudo git clone https://github.com/LucasSpeer/SmartMirror.git
 sudo chmod 777 /var/run/sdp
 cd ~/SmartMirror/lib/
 sudo cp main.conf /etc/bluetooth/
-sudo cp machine-info /etc/
+sudo cp rc.local machine-info /etc/
 sudo cp panel /home/pi/.config/lxpanel/LXDE-pi/panels/
 sudo cp dbus-org.bluez.service /etc/systemd/system/
 sudo hciconfig hci0 | grep Address | sudo nano addr  //creates te file addr.save with a line containing the local BT MAC addresshci
