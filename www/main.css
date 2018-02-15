@@ -27,6 +27,7 @@ h1 {
 	grid-column-start: 1;
 	grid-column-end: 2;
 	align-self: start;
+	margin-left: 8px !important;
 }
 .r1,
 .r2,
@@ -36,6 +37,7 @@ h1 {
 	z-index: -1;
 	grid-column-start: 2;
 	align-self: start;
+	margin-right: 8px !important;
 }
 .none{
 	color: black !important;

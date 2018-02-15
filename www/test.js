@@ -87,14 +87,9 @@ function update(config, zip){
 	loadWeather(zip)
 }
 $( document ).ready(function () {
-<<<<<<< HEAD
 	'use strict'
 	var mytext = {contents: ""};
-=======
-	var zip = $("#zip").text(),
-		i = 0;
-	 mytext = {contents: ""};
->>>>>>> 8b48d1093aa312087f26a91c9a1b50fd5c730209
+	var i = 0;
 	readTextFile("http://localhost/config.json",mytext);
 	var config = JSON.parse(mytext.contents);
 	var zip = config.weather.zipcode;
