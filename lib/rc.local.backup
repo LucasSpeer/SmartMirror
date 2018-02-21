@@ -1,0 +1,18 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This is the rc.local file that runs on the first boot of the pi (triggering firstBoot.sh)
+# firstBoot.sh will change the rc.local file in /etc/ to no longer call itself
+
+# Print the IP address
+_IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP"
+fi
+
+cd /home/pi/SmartMirror/lib/scr
+./firstBoot.sh
+./PIinit.sh &
+
+exit 0
