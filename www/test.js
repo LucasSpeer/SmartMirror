@@ -70,10 +70,7 @@ function assignSpots(config){
 			$(spots[4]).addClass(config.layout.l3);
 			$(spots[5]).addClass(config.layout.r3);
 		}
-function update(){
-	var mytext = {contents: ""};
-	readTextFile("http://localhost/config.json",mytext);		//read config file every time in case of changes
-	var config = JSON.parse(mytext.contents);		//get a JSON array from the raw file contents
+function update(config){
 	var zip = config.weather.zipcode;		//get zipcode for loadweather()
 	assignSpots(config);
 	Greeting(config);		//set dynamic greeting
@@ -88,7 +85,11 @@ function update(){
 }
 $( document ).ready(function () {
 	'use strict'
-	update();//the initial execution is required because set interval will wait before executing for the first time
+	var mytext = {contents: ""};
+	readTextFile("http://localhost/config.json",mytext);		//read config file every time in case of changes
+	var oldConfig = JSON.parse(mytext.contents);		//get a JSON array from the raw file contents
+	var config = oldConfig;
+	update(config);//the initial execution is required because set interval will wait before executing for the first time
 	var weatherSpot = $( ".Weather" );
 	weatherSpot.text("");
 	weatherSpot.append( $( ".weatherContainer" ));
@@ -96,12 +97,18 @@ $( document ).ready(function () {
 	emptySpots.text("");
 	$( ".Time" ).addClass( "mainText" );
 	setInterval(function () {
-		update();
-		var weatherSpot = $( ".Weather" );
-		weatherSpot.append( $( ".weatherContainer" ));
-		var emptySpots = $( ".None" );
-		emptySpots.text("");
-		$( ".Time" ).addClass( "mainText" );
+		var mytext = {contents: ""};
+		readTextFile("http://localhost/config.json",mytext);		//read config file every time in case of changes
+		var config = JSON.parse(mytext.contents);					//get a JSON array from the raw file contents
+		if(config != oldConfig){									//if the config file has not been changed don't update everything
+			update(config);
+			var weatherSpot = $( ".Weather" );
+			weatherSpot.append( $( ".weatherContainer" ));
+			var emptySpots = $( ".None" );
+			emptySpots.text("");
+			$( ".Time" ).addClass( "mainText" );
+			oldConfig = config;
+		}
 	}, 5000); //Update everything but time(handled in time js) every this many ms
 });
 

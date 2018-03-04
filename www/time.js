@@ -1,9 +1,6 @@
 /*globals $:false */
-function time()
+function time(config)
 {
-	var mytext = {contents: ""};
-	readTextFile("http://localhost/config.json",mytext);		//read config file every time in case of changes
-	var config = JSON.parse(mytext.contents);		//get a JSON array from the raw file contents
 	var time = $(".Time");
 	var today = new Date();
 	//t = setTimeout(startTime, 500);
@@ -40,8 +37,17 @@ function time()
 }
 $( document ).ready(function () {
 	'use strict'
-	time(); //intialize time
+	var mytext = {contents: ""};
+	readTextFile("http://localhost/config.json",mytext);		//read config file
+	var config = JSON.parse(mytext.contents);		//get a JSON array from the raw file contents
+	time(config); //intialize time
 	setInterval(function () {
-		time();
+		time(config);
 	}, 1000); //Update time every second
+	setInterval(function () {
+		mytext = {contents: ""};
+		readTextFile("http://localhost/config.json",mytext);		//read config file
+	    config = JSON.parse(mytext.contents);		//get a JSON array from the raw file contents
+	}, 10000); //check for style changes every this many ms
+		
 });
