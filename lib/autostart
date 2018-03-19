@@ -2,4 +2,4 @@
 @pcmanfm --desktop --profile LXDE-pi
 @xscreensaver -no-splash
 @point-rpi
-@/usr/bin/chrome --kiosk --incognito
+@/usr/bin/chromium-browser --kiosk --incognito http://localhost/

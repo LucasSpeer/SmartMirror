@@ -2,7 +2,7 @@
 cd /home/pi/SmartMirror/
 sudo git pull
 echo "checking for/applying updates to SmartMirror"
-cd /home/pi/SmartMirror www/
+cd /home/pi/SmartMirror/www/
 ./saveToServer.sh
 cd /home/pi/SmartMirror/lib/scr/
 sudo hciconfig hci0 up
