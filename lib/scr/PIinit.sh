@@ -5,6 +5,7 @@ echo "checking for/applying updates to SmartMirror"
 cd /home/pi/SmartMirror/www/
 ./saveToServer.sh
 cd /home/pi/SmartMirror/lib/scr/
+iwlist wlan0 scan | grep ESSID | sudo nano wifilist
 sudo hciconfig hci0 up
 echo "starting bluetooth device hci0"
 sudo hciconfig hci0 piscan &

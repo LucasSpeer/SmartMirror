@@ -9,11 +9,11 @@ except:
     status = "Not connected"
 if status == "Connected":
 	wifiFile = open('wifilist.save', 'r')
-	listStr = ""
+	listStr = "\n"
 	for line in wifiFile:
 		tmp = line
 		sep = tmp.split("\"")
 		if "\\" not in sep[1]:
-			if (sep[1] + "\n") not in listStr:
+			if ("\n" + sep[1] + "\n") not in listStr:
 				listStr += sep[1] + "\n"
 	print(listStr)
