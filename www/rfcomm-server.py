@@ -6,6 +6,8 @@
 # $Id: rfcomm-server.py 518 2007-08-10 07:20:07Z albert $
 
 from bluetooth import *
+import os
+
 # Set up the bluetooth socket as a server
 server_sock=BluetoothSocket( RFCOMM )
 server_sock.bind(("",PORT_ANY))
@@ -29,18 +31,36 @@ def dataHandler(data):
 	print(data)
 	data = ""
 	setFile.close()
+
+def wifiHandler(data):
+	wifiArr = data.split("\n"); #split the data on the return key to get ssid and key seperate
+	ssid = wifiArr[0] 
+	key = wifiArr[1]
+	wifiConf = open('/etc/wpa_supplicant/wpa_supplicant.conf', 'w')
+	strTowrite = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\ncountry=GB\network={\n    ssid=\"" + ssid + "\"\n    psk=\"" + key + "\n}"
+	wifiConf.write(strToWrite);
 	
+	
+wifiFile = open('wifilist.save', 'r')
+wifi = wifiFile.read()
 while True:                   
 	print("Waiting for connection on RFCOMM channel %d" % port)
 
 	client_sock, client_info = server_sock.accept()		#Accept incoming connections
 	print("Accepted connection from ", client_info)
-
+	if wifi != "Connected":
+		try:
+			client_sock.send(wifi)
+		except IOError:
+			pass
 	try:
 		while True:
 			data = client_sock.recv(1024)
 			if len(data) == 0: break
-			dataHandler(data)
+			if data.startswith("{"):
+				dataHandler(data)
+			else:
+				wifiHandler(data)
 	except IOError:
 		pass
 
