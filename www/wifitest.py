@@ -12,11 +12,14 @@ if status == "Not connected": #if urlopen(url) throws an error wifi needs to be 
 	listStr = "\n" #for the duplicate check later on
 	for line in wifiFile: #for each line in the rough wifilist
 		tmp = line
-		sep = tmp.split("\"") #create a string array split on each quotation mark (sep[1] is the string containing just the ssid)
-		if "\\" not in sep[1]: #check for a hidden/garbage ssid
-			if ("\n" + sep[1] + "\n") not in listStr: #check for duplicates
-				listStr += sep[1] + "\n" 
+		if "\"\"" not in tmp:
+			if "ESSID" in tmp:
+				sep = tmp.split("\"") #create a string array split on each quotation mark (sep[1] is the string containing just the ssid)
+				if ("\n" + sep[1] + "\n") not in listStr: #check for duplicates
+					listStr += sep[1] + "\n" 
+	wifiFile.close()
+	wifiFile = open('wifilist.save', 'w') #close and reopen the wifilist file to overwrite the contents with the better formatted list
 	wifiFile.write(listStr)
-connStatus.write(status)
-connStatus.close()
+statusFile.write(status)
+statusFile.close()
 wifiFile.close()

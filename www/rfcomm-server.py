@@ -24,10 +24,7 @@ advertise_service( server_sock, "SmartMirror",
 #                   protocols = [ OBEX_UUID ] 
                     )
                     
-
-wifiFile = open('connStatus', 'r')
-wifi = wifiFile.read()
-
+	
 def dataHandler(data):
 	setFile = open('config.json', 'w')
 	setFile.write(data)			#Overrite any data with as neccesarry and save
@@ -39,13 +36,15 @@ def wifiHandler(data):
 	wifiArr = data.split("\n"); #split the data on the return key to get ssid and key seperate
 	ssid = wifiArr[0] 
 	key = wifiArr[1]
-	command = "wpa_passphrase \"" + ssid + " \"" + key + "\"  | sudo tee -a /etc/wpa_supplicant/wpa_supplicant.conf > /dev/null"
-	wifiConf.append(strToWrite);
-	testfile = open('test.txt', 'w')
-	testfile.write(command)
-	testfile.close()
-	os.system(command)
-	os.system("sudo python wifitest.py")
+	wifiConf = open('/etc/wpa_supplicant/wpa_supplicant.conf', 'w')
+	strTowrite = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\n\nnetwork={\n    ssid=\"" + ssid + "\"\n    psk=\"" + key + "\nkey_mgmt=WPA-PSK\n}"
+	wifiConf.write(strToWrite)
+	#command = "sudo iwconfig wlan0 essid " + ssid + " key s:" + key
+	#os.system(command)
+	
+	
+wifiFile = open('wifilist.save', 'r')
+wifi = wifiFile.read()
 while True:                   
 	print("Waiting for connection on RFCOMM channel %d" % port)
 
