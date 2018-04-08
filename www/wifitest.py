@@ -1,11 +1,11 @@
 import urllib
 
 wifiFile = open('wifilist.save', 'r+') #open the file containing the list of wifi networks generated in PIinit.sh by the line "iwlist wpa0 scan | grep ESSID | sudo nano wifilist"
+statusFile = open('connStatus', 'w')
 try:
 	url = "https://www.google.com" #check to see if wifi is connected
 	urllib.urlopen(url)
 	status = "Connected"
-	wifiFile.write(status)
 except:
     status = "Not connected" 
 if status == "Not connected": #if urlopen(url) throws an error wifi needs to be setup
@@ -17,4 +17,6 @@ if status == "Not connected": #if urlopen(url) throws an error wifi needs to be 
 			if ("\n" + sep[1] + "\n") not in listStr: #check for duplicates
 				listStr += sep[1] + "\n" 
 	wifiFile.write(listStr)
+connStatus.write(status)
+connStatus.close()
 wifiFile.close()
