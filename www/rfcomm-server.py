@@ -39,22 +39,26 @@ def wifiHandler(data):
 	wifiConf = open('/etc/wpa_supplicant/wpa_supplicant.conf', 'w')
 	strTowrite = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\n\nnetwork={\n    ssid=\"" + ssid + "\"\n    psk=\"" + key + "\nkey_mgmt=WPA-PSK\n}"
 	wifiConf.write(strToWrite)
-	#command = "sudo iwconfig wlan0 essid " + ssid + " key s:" + key
-	#os.system(command)
+	command = "sudo wpa_cli -i wlan0 reconfigure"
+	os.system(command)
 	
 	
-wifiFile = open('wifilist.save', 'r')
-wifi = wifiFile.read()
+statusFile = open('connStatus', 'r')
+status = statusFile.read()
+
 while True:                   
 	print("Waiting for connection on RFCOMM channel %d" % port)
 
 	client_sock, client_info = server_sock.accept()		#Accept incoming connections
 	print("Accepted connection from ", client_info)
-	if wifi != "Connected":
+	if status != "Connected":
+		wifiFile = open('wifilist.save', 'r')
+		wifi = wifiFile.read()
 		try:
 			client_sock.send(wifi)
 		except IOError:
 			pass
+		wifiFile.close()
 	try:
 		while True:
 			data = client_sock.recv(1024)
