@@ -72,9 +72,9 @@ function assignSpots(config){
 		}
 function update(config){
 	var zip = config.weather.zipcode;		//get zipcode for loadweather()
-	assignSpots(config);
 	Greeting(config);		//set dynamic greeting
-	var ForC;
+	
+	var ForC; //F or C
 	if(config.weather.useC === true){
 		ForC = 'c';
 	}
@@ -89,26 +89,33 @@ $( document ).ready(function () {
 	readTextFile("http://localhost/config.json",mytext);		//read config file every time in case of changes
 	var oldConfig = JSON.parse(mytext.contents);		//get a JSON array from the raw file contents
 	var config = oldConfig;
+	assignSpots(config);
 	update(config);//the initial execution is required because set interval will wait before executing for the first time
 	var weatherSpot = $( ".Weather" );
 	weatherSpot.text("");
-	weatherSpot.append( $( ".weatherContainer" ));
+	var weatherContainer = $(".weatherContainer" );
+	weatherSpot.append(weatherContainer);
 	var emptySpots = $( ".None" );
 	emptySpots.text("");
 	$( ".Time" ).addClass( "mainText" );
 	setInterval(function () {
-		var mytext = {contents: ""};
+		var oldWeather = $( ".Weather" );		//Get all html objects with Weather class for checking 
+		mytext = {contents: ""};
 		readTextFile("http://localhost/config.json",mytext);		//read config file every time in case of changes
-		var config = JSON.parse(mytext.contents);					//get a JSON array from the raw file contents
+		config = JSON.parse(mytext.contents);					//get a JSON array from the raw file contents
 		if(config != oldConfig){									//if the config file has not been changed don't update everything
-			update(config);
+			assignSpots(config);
 			var weatherSpot = $( ".Weather" );
-			weatherSpot.append( $( ".weatherContainer" ));
+			if(oldWeather != weatherSpot){
+				weatherSpot.text("");
+			}
+			weatherSpot.append(weatherContainer);
 			var emptySpots = $( ".None" );
 			emptySpots.text("");
 			$( ".Time" ).addClass( "mainText" );
+			update(config);
 			oldConfig = config;
 		}
-	}, 5000); //Update everything but time(handled in time js) every this many ms
+	}, 7000); //Update everything but time(handled in time js) every this many ms
 });
 
