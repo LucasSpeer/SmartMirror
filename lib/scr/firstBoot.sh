@@ -1,18 +1,23 @@
 #!/bin/bash
-#Auth: Lucas Speer 2/21/18
-#This file runs one time from rc.local then edits rc.local to no longer call itself
-# /etc/bluetooth/rfcomm.conf is set dynamically using th hciconfig line and the rfcommset.py script
+# Auth: Lucas Speer 2/21/18
+# This file runs one time from rc.local then edits rc.local to no longer call itself
+# /etc/bluetooth/rfcomm.conf is set dynamically using th hciconfig line and the rfcommset.py sc
+# This file also creates a local directory and sets up the necesarry structures. Consider it a setup executable
+cd /home/pi
+sudo mkdir SmartMirror-1.0/
+sudo mkdir SmartMirror-1.0/SmartMirror/
+sudo cp SmartMirror/* SmartMirror-1.0/SmartMirror/ 
 sudo chmod 777 /var/run/sdp
 echo "making /var/run/sdp executable"
-cd /home/pi/SmartMirror/lib/scr/
+cd /home/pi/SmartMirror-1.0/SmartMirror/lib/scr/
 sudo hciconfig hci0 | grep Address | sudo nano addr
 echo "creating addr.save which contains the local BT mac address pulled from hciconfig, for use with rfcommset.py"
-sudo python ~/SmartMirror/lib/rfcommset.py
+sudo python ~/SmartMirror-1.0/SmartMirror/lib/rfcommset.py
 echo "creating /etc/bluetooth/rfcomm.conf"
 sudo cp rfcomm.conf /etc/bluetooth/
 sudo cp bluezutils.py /var/www/html/
 echo "moving rfcomm.conf and bluezutils into /var/www/html/"
-cd /home/pi/SmartMirror/lib/
+cd /home/pi/SmartMirror-1.0/SmartMirror/lib/
 sudo cp main.conf /etc/bluetooth/
 echo "copying main.conf into /etc/bluetooth/"
 sudo cp rc.local machine-info /etc/

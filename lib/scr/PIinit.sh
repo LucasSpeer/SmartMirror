@@ -1,12 +1,11 @@
 #!/bin/sh
-cd /home/pi/SmartMirror/www/
+cd /home/pi/SmartMirror-1.0/SmartMirror/www/
 ./saveToServer.sh
-cd /home/pi/SmartMirror/lib/scr/
+cd /home/pi/SmartMirror-1.0/SmartMirror/lib/scr/
 sudo hciconfig hci0 up
 echo "starting bluetooth device hci0"
 sudo hciconfig hci0 piscan &
 echo "making SmartMirror Discoverable and starting rfcomm server and bluetooth agent"
-sudo cp rfcomm-server.py /var/www/html/
 sudo cp simple-agent /var/www/html/
 cd /var/www/html/
 sudo ifconfig wlan0 up

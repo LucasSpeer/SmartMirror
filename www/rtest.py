@@ -38,7 +38,7 @@ def wifiHandler(data):
 	key = wifiArr[1]
 	print( wifiArr )
 	wifiConf = open('wpa_supplicant.conf', 'w') #/etc/wpa_supplicant/wpa_supplicant.conf
-	strToWrite = "ctrl_interface=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\n\nnetwork={\n    ssid=\"" + ssid + "\"\n    psk=\"" + key + "\"\n    key_mgmt=WPA-PSK\n}"
+	strToWrite = "ctrl_interface=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\country=US\n\nnetwork={\n	ssid=\"" + ssid + "\"\n	psk=\"" + key + "\"\n	key_mgmt=WPA-PSK\n}"
 	wifiConf.write(strToWrite)
 	#command = "sudo wpa_cli -i wlan0 reconfigure"
 	#os.system(command)
