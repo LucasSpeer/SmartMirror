@@ -3,3 +3,4 @@
 @xscreensaver -no-splash
 @point-rpi
 @/usr/bin/chromium-browser --kiosk --disable-notifications --disable-infobars --incognito http://localhost/
+@unclutter -idle 0.1 -root
