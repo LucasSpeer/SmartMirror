@@ -20,5 +20,5 @@ echo "Copying dbus-org.bluez.service into /etc/systemd/system/ to run BT in comp
 sudo cp autostart /home/pi/.config/lxpanel/LXDE-pi/
 echo "Copying autostart into /home/pi/.config/lxpanel/LXDE-pi/ to boot chrome on startup"
 cd /home/pi/SmartMirror-1.0/SmartMirror/lib/scr/
-./BTinit.sh
-echo("Setting up bluetooth config files (/etc/bluetooth/ main.conf & rfcomm.conf)")
+sudo ./BTinit.sh
+echo "Setting up bluetooth config files (/etc/bluetooth/ main.conf & rfcomm.conf)"
