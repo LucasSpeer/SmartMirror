@@ -36,12 +36,15 @@ def wifiHandler(data):
 	wifiArr = data.split("\n"); #split the data on the return key to get ssid and key seperate
 	ssid = wifiArr[0] 
 	key = wifiArr[1]
-	wifiConf = open('/etc/wpa_supplicant/wpa_supplicant.conf', 'w')
-	strTowrite = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\n\nnetwork={\n    ssid=\"" + ssid + "\"\n    psk=\"" + key + "\nkey_mgmt=WPA-PSK\n}"
+	print( wifiArr )
+	wifiConf = open('/etc/wpa_supplicant/wpa_supplicant.conf', 'w') #/etc/wpa_supplicant/wpa_supplicant.conf
+	strToWrite = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\ncountry=US\n\nnetwork={\n	ssid=\"" + ssid + "\"\n	psk=\"" + key + "\"\n	key_mgmt=WPA-PSK\n}"
 	wifiConf.write(strToWrite)
-	command = "sudo wpa_cli -i wlan0 reconfigure"
+	wifiConf.close()
+	command = "sudo systemctl daemon-reload"
 	os.system(command)
-	
+	command = "sudo systemctl restart dhcpcd"
+	os.system(command)
 	
 statusFile = open('connStatus', 'r')
 status = statusFile.read()
