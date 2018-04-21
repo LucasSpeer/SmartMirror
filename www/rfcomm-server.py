@@ -47,7 +47,7 @@ def wifiHandler(data):
 	os.system(command)
 	command = "killall chromium-browser"		#Kill the existing chromium process(that failed due to no internet)...
 	os.system(command)
-	command = "chromium-browser --incognito --no-sandbox --disable-notifications --disable-infobars --kiosk localhost/"		#and open a new one.
+	command = "chromium-browser --incognito --no-sandbox --disable-notifications --disable-infobars --kiosk localhost/ &"		#and open a new one.
 	os.system(command)
 	
 statusFile = open('connStatus', 'r')
