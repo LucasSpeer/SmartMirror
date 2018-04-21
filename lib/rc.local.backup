@@ -11,7 +11,7 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-cd /home/pi/SmartMirror/lib/scr
+cd /home/pi/SmartMirror-1.0/SmartMirror/lib/scr
 ./BTinit.sh 
 ./PIinit.sh &
 
