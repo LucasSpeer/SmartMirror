@@ -12,7 +12,7 @@ if [ "$_IP" ]; then
 fi
 
 cd /home/pi/SmartMirror/lib/scr
-./firstBoot.sh
+./BTinit.sh 
 ./PIinit.sh &
 
 exit 0
