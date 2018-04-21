@@ -72,9 +72,9 @@ function assignSpots(config){
 		}
 function update(config){
 	var zip = config.weather.zipcode;		//get zipcode for loadweather()
+	assignSpots(config);
 	Greeting(config);		//set dynamic greeting
-	
-	var ForC; //F or C
+	var ForC;
 	if(config.weather.useC === true){
 		ForC = 'c';
 	}
@@ -85,37 +85,45 @@ function update(config){
 }
 $( document ).ready(function () {
 	'use strict'
+	var connected = navigator.onLine;
+	if (connected != true){
+		var spots = [".l1",".r1",".l2",".r2",".l3",".r3"];
+		//assign each spot it's module from config.JSON
+		for(var i = 0; i < 6; i++){
+			$(spots[i]).text("")
+			removeModules(spots[i]);		//clear all module classes
+		}
+		$(".l1").text("No Network Connection Detected. Please use the app to choose a network")
+	}
+	while( connected != true ){ //wait for an 
+		connected = navigator.onLine;
+		connected.waitSeconds(5);
+	}
+	$(".l1").text("")
 	var mytext = {contents: ""};
 	readTextFile("http://localhost/config.json",mytext);		//read config file every time in case of changes
 	var oldConfig = JSON.parse(mytext.contents);		//get a JSON array from the raw file contents
 	var config = oldConfig;
-	assignSpots(config);
 	update(config);//the initial execution is required because set interval will wait before executing for the first time
 	var weatherSpot = $( ".Weather" );
 	weatherSpot.text("");
-	var weatherContainer = $(".weatherContainer" );
-	weatherSpot.append(weatherContainer);
+	weatherSpot.append( $( ".weatherContainer" ));
 	var emptySpots = $( ".None" );
 	emptySpots.text("");
 	$( ".Time" ).addClass( "mainText" );
 	setInterval(function () {
-		var oldWeather = $( ".Weather" );		//Get all html objects with Weather class for checking 
-		mytext = {contents: ""};
+		var mytext = {contents: ""};
 		readTextFile("http://localhost/config.json",mytext);		//read config file every time in case of changes
-		config = JSON.parse(mytext.contents);					//get a JSON array from the raw file contents
+		var config = JSON.parse(mytext.contents);					//get a JSON array from the raw file contents
 		if(config != oldConfig){									//if the config file has not been changed don't update everything
-			assignSpots(config);
+			update(config);
 			var weatherSpot = $( ".Weather" );
-			if(oldWeather != weatherSpot){
-				weatherSpot.text("");
-			}
-			weatherSpot.append(weatherContainer);
+			weatherSpot.append( $( ".weatherContainer" ));
 			var emptySpots = $( ".None" );
 			emptySpots.text("");
 			$( ".Time" ).addClass( "mainText" );
-			update(config);
 			oldConfig = config;
 		}
-	}, 7000); //Update everything but time(handled in time js) every this many ms
+	}, 5000); //Update everything but time(handled in time js) every this many ms
 });
 
