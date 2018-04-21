@@ -17,3 +17,5 @@ node_modules
 
 #smartmirrorOS files
 *.image
+SmartMirrorOS-1.0
+*.tar.gz
