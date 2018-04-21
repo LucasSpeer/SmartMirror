@@ -41,9 +41,13 @@ def wifiHandler(data):
 	strToWrite = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\ncountry=US\n\nnetwork={\n	ssid=\"" + ssid + "\"\n	psk=\"" + key + "\"\n	key_mgmt=WPA-PSK\n}"
 	wifiConf.write(strToWrite)
 	wifiConf.close()
-	command = "sudo systemctl daemon-reload"
+	command = "sudo systemctl daemon-reload"	#restart the network...
 	os.system(command)
-	command = "sudo systemctl restart dhcpcd"
+	command = "sudo systemctl restart dhcpcd"	#with these two commands.
+	os.system(command)
+	command = "killall chromium-browser"		#Kill the existing chromium process(that failed due to no internet)...
+	os.system(command)
+	command = "chromium-browser --incognito --kiosk localhost/"		#and open a new one.
 	os.system(command)
 	
 statusFile = open('connStatus', 'r')
