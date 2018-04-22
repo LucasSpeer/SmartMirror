@@ -3,6 +3,7 @@
 
 cd /home/pi/
 sudo rm -R SmartMirror-1.0/SmartMirror/
+sudo mkdir SmartMirror-1.0/SmartMirror/
 sudo cp SmartMirror/* -r SmartMirror-1.0/SmartMirror/
 cd /home/pi/SmartMirror-1.0/SmartMirror/lib/
 sudo cp main.conf /etc/bluetooth/

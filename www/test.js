@@ -72,12 +72,12 @@ function assignSpots(config){
 		}
 function update(config){
 	var zip = config.weather.zipcode;		//get zipcode for loadweather()
-	var oldTime = $(".Time");
+	var oldWeather = $(".Weather");
 	assignSpots(config);
-	Greeting(config);		//set dynamic greeting
-	var newTime = $(".Time");
-	if(!oldTime.hasClass("Time")){
-		oldTime.text("");
+	var newWeather = $(".Weather");
+	if(!oldWeather.hasClass("Weather")){
+		newWeather.text("");
+		newWeather.append( $( ".weatherContainer" ));
 	}
 	var ForC;
 	if(config.weather.useC === true){
@@ -87,6 +87,7 @@ function update(config){
 		ForC = 'f';
 	}
 	loadWeather(zip,ForC);		//set weather
+	Greeting(config);		//set dynamic greeting
 }
 $( document ).ready(function () {
 	'use strict'
@@ -94,6 +95,7 @@ $( document ).ready(function () {
 	readTextFile("http://localhost/config.json",mytext);		//read config file every time in case of changes
 	var oldConfig = JSON.parse(mytext.contents);		//get a JSON array from the raw file contents
 	var config = oldConfig;
+	assignSpots(config);
 	$(".l1").text("");
 	update(config);//the initial execution is required because set interval will wait before executing for the first time
 	var weatherSpot = $( ".Weather" );
@@ -116,6 +118,6 @@ $( document ).ready(function () {
 			update(config);
 			oldConfig = config;
 		}
-	}, 5000); //Update everything but time(handled in time js) every this many ms
+	}, 2000); //Update everything but time(handled in time js) every this many ms
 });
 
