@@ -48,7 +48,7 @@ function Greeting(config)
 		{greeting.text("Good Morning");}
 
 }
-function removeModules(spot){
+function removeModules(spot){ 
 	$(spot).removeClass("None");
 	$(spot).removeClass("Weather");
 	$(spot).removeClass("Greeting");
@@ -72,8 +72,13 @@ function assignSpots(config){
 		}
 function update(config){
 	var zip = config.weather.zipcode;		//get zipcode for loadweather()
+	var oldTime = $(".Time");
 	assignSpots(config);
 	Greeting(config);		//set dynamic greeting
+	var newTime = $(".Time");
+	if(!oldTime.hasClass("Time")){
+		oldTime.text("");
+	}
 	var ForC;
 	if(config.weather.useC === true){
 		ForC = 'c';
@@ -98,9 +103,9 @@ $( document ).ready(function () {
 	emptySpots.text("");
 	$( ".Time" ).addClass( "mainText" );
 	setInterval(function () {
-		var mytext = {contents: ""};
+		mytext = {contents: ""};
 		readTextFile("http://localhost/config.json",mytext);		//read config file every time in case of changes
-		var config = JSON.parse(mytext.contents);					//get a JSON array from the raw file contents
+		config = JSON.parse(mytext.contents);					//get a JSON array from the raw file contents
 		if(config != oldConfig){									//if the config file has not been changed don't update everything
 			update(config);
 			var weatherSpot = $( ".Weather" );
@@ -108,6 +113,7 @@ $( document ).ready(function () {
 			var emptySpots = $( ".None" );
 			emptySpots.text("");
 			$( ".Time" ).addClass( "mainText" );
+			update(config);
 			oldConfig = config;
 		}
 	}, 5000); //Update everything but time(handled in time js) every this many ms
