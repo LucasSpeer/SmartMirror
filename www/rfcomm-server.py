@@ -7,6 +7,7 @@
 
 from bluetooth import *
 import os
+import time
 
 # Set up the bluetooth socket as a server
 server_sock=BluetoothSocket( RFCOMM )
@@ -48,6 +49,7 @@ def wifiHandler(data):
 	command = "killall chromium-browser"		#Kill the existing chromium process(that failed due to no internet)...
 	os.system(command)
 	command = "chromium-browser --incognito --no-sandbox --disable-notifications --disable-infobars --kiosk localhost/"		#and open a new one.
+	time.sleep(4) #wait for the network to connect before reopening chrome
 	os.system(command)
 	
 statusFile = open('connStatus', 'r')
