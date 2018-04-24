@@ -42,32 +42,32 @@ def wifiHandler(data):
 	strToWrite = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\ncountry=US\n\nnetwork={\n	ssid=\"" + ssid + "\"\n	psk=\"" + key + "\"\n	key_mgmt=WPA-PSK\n}"
 	wifiConf.write(strToWrite)
 	wifiConf.close()
-	command = "sudo systemctl daemon-reload"	#restart the network...
-	os.system(command)
-	command = "sudo systemctl restart dhcpcd"	#with these two commands.
-	os.system(command)
-	command = "killall chromium-browser"		#Kill the existing chromium process(that failed due to no internet)...
-	os.system(command)
-	command = "chromium-browser --incognito --no-sandbox --disable-notifications --disable-infobars --kiosk localhost/"		#and open a new one.
-	time.sleep(4) #wait for the network to connect before reopening chrome
+	command = "sudo reboot"		#Kill the existing chromium process(that failed due to no internet)...
 	os.system(command)
 	
-statusFile = open('connStatus', 'r')
-status = statusFile.read()
+	#this following block is supposed to close chrome, reconnect to the network, and reopen chrome. It only works when this program is run from a command line, not from PIinit.sh
+	#command = "killall chromium-browser"		#Kill the existing chromium process(that failed due to no internet)...
+	#os.system(command)
+	#command = "sudo systemctl daemon-reload"	#restart the network...
+	#os.system(command)
+	#command = "sudo systemctl restart dhcpcd"	#with these two commands.
+	#os.system(command)
+	#command = "DISPLAY=:0.0 chromium-browser --incognito --no-sandbox --disable-notifications --disable-infobars --start-fullscreen localhost/"		#and open a new one.
+	#time.sleep(2) #wait for the network to connect before reopening chrome
+	#os.system(command)
 
 while True:                   
 	print("Waiting for connection on RFCOMM channel %d" % port)
 
 	client_sock, client_info = server_sock.accept()		#Accept incoming connections
 	print("Accepted connection from ", client_info)
-	if status != "Connected":
-		wifiFile = open('wifilist.save', 'r')
-		wifi = wifiFile.read()
-		try:
-			client_sock.send(wifi)
-		except IOError:
-			pass
-		wifiFile.close()
+	wifiFile = open('wifilist.save', 'r')
+	wifi = wifiFile.read()
+	try:
+		client_sock.send(wifi)
+	except IOError:
+		pass
+	wifiFile.close()
 	try:
 		while True:
 			data = client_sock.recv(1024)
