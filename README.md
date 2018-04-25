@@ -15,27 +15,11 @@ Current Features:
 
     Time-Dynamic greeting
 
-    App configuration via bluetooth (Located in github.com/lucasspeer/BTmirror-App.git)
+    Layout/Settings configuration via bluetooth (Located in github.com/lucasspeer/BTmirror-App.git)
+    
+    wifi configuration from the android app
 
-Possible future additions:
-
-	wifi configuration from the android app (Last step needed to free pi from mouse and keyboard)
-    
-    voice activation
-    
-    music/alarm capabilities
-    
-    notifications
-    
-    news feed
-    
-    email
-    
-    notes
-    
-    auto-dim
-    
-    synchronized automation with modules (lights, coffee maker, etc)
+	auto-dim
 
 Follow these commands to setup your pi (only zero w has been tested) as a SmartMirror
 You'll need to be connected to the internet first
@@ -44,10 +28,12 @@ You'll need to be connected to the internet first
 	sudo apt-get update
 	sudo apt-get install ipython
 	sudo apt-get install libbluetooth-dev
-	sudo apt-get install apache2
+	sudo apt-get install apahe2
+	sudo apt-get install unclutter
 	sudo pip install pybluez
 	sudo git clone https://github.com/LucasSpeer/SmartMirror.git
-	cd ~/SmartMirror/lib/
-	sudo cp rc.local.backup /etc/rc.local
+	cd ~/SmartMirror/
+	./update.sh
+	sudo cp lib/rc.local.backup /etc/rc.local
 	
-after this reboot and firstBoot.sh and PIinit.sh will change the necessary system files and open chrome in kiosk(fullscreen) mode and loads https://localhost/
+after this reboot and BTinit.sh and PIinit.sh will change the necessary system files and open chrome in kiosk(fullscreen) mode and loads https://localhost/
