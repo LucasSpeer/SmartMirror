@@ -37,17 +37,36 @@ function time(config)
 }
 $( document ).ready(function () {
 	'use strict'
+	var longWait = 2000;	//for not showing seconds
+	var shortWait = 250;
 	var mytext = {contents: ""};
 	readTextFile("http://localhost/config.json",mytext);		//read config file
 	var config = JSON.parse(mytext.contents);		//get a JSON array from the raw file contents
 	time(config); //intialize time
-	setInterval(function () {
+	var timeInterval = longWait;
+	if(config.general.showSec){
+		timeInterval = shortWait;
+	}
+	var newTimeInterval = timeInterval;
+	var timeFunc = setInterval(function () {
 		time(config);
-	}, 200); //Update time every this many ms
+	}, timeInterval); //Update time every this many ms
 	setInterval(function () {
 		mytext = {contents: ""};
 		readTextFile("http://localhost/config.json",mytext);		//read config file
 	    config = JSON.parse(mytext.contents);		//get a JSON array from the raw file contents
+		if(config.general.showSec){		
+			newTimeInterval = shortWait;
+		}
+		else{
+			newTimeInterval = longWait;
+		}
+		if(newTimeInterval != timeInterval){	//check if showSec has changed
+			clearInterval(timeFunc);
+			timeInterval = newTimeInterval;
+			var timeFunc = setInterval(function () {
+				time(config);
+			}, timeInterval);
+		}
 	}, 4000); //check for style changes every this many ms
-		
 });
