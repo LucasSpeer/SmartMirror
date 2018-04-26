@@ -43,11 +43,11 @@ $( document ).ready(function () {
 	time(config); //intialize time
 	setInterval(function () {
 		time(config);
-	}, 1000); //Update time every second
+	}, 200); //Update time every this many ms
 	setInterval(function () {
 		mytext = {contents: ""};
 		readTextFile("http://localhost/config.json",mytext);		//read config file
 	    config = JSON.parse(mytext.contents);		//get a JSON array from the raw file contents
-	}, 10000); //check for style changes every this many ms
+	}, 4000); //check for style changes every this many ms
 		
 });

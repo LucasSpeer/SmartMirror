@@ -87,6 +87,9 @@ function update(config){
 		ForC = 'f';
 	}
 	loadWeather(zip,ForC);		//set weather
+	var emptySpots = $( ".None" );
+	emptySpots.text("");
+	$( ".Time" ).addClass( "mainText" );
 	Greeting(config);		//set dynamic greeting
 }
 $( document ).ready(function () {
@@ -110,14 +113,8 @@ $( document ).ready(function () {
 		config = JSON.parse(mytext.contents);					//get a JSON array from the raw file contents
 		if(config != oldConfig){									//if the config file has not been changed don't update everything
 			update(config);
-			var weatherSpot = $( ".Weather" );
-			weatherSpot.append( $( ".weatherContainer" ));
-			var emptySpots = $( ".None" );
-			emptySpots.text("");
-			$( ".Time" ).addClass( "mainText" );
-			update(config);
 			oldConfig = config;
 		}
-	}, 2000); //Update everything but time(handled in time js) every this many ms
-});
+	}, 4000); //Update everything but time(handled in time js) every this many ms
+})
 
