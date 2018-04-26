@@ -98,15 +98,6 @@ $( document ).ready(function () {
 	readTextFile("http://localhost/config.json",mytext);		//read config file every time in case of changes
 	var oldConfig = JSON.parse(mytext.contents);		//get a JSON array from the raw file contents
 	var config = oldConfig;
-	assignSpots(config);
-	$(".l1").text("");
-	update(config);//the initial execution is required because set interval will wait before executing for the first time
-	var weatherSpot = $( ".Weather" );
-	weatherSpot.text("");
-	weatherSpot.append( $( ".weatherContainer" ));
-	var emptySpots = $( ".None" );
-	emptySpots.text("");
-	$( ".Time" ).addClass( "mainText" );
 	setInterval(function () {
 		mytext = {contents: ""};
 		readTextFile("http://localhost/config.json",mytext);		//read config file every time in case of changes
