@@ -42,19 +42,19 @@ def wifiHandler(data):
 	strToWrite = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\ncountry=US\n\nnetwork={\n	ssid=\"" + ssid + "\"\n	psk=\"" + key + "\"\n	key_mgmt=WPA-PSK\n}"
 	wifiConf.write(strToWrite)
 	wifiConf.close()
-	#command = "sudo reboot"		#Kill the existing chromium process(that failed due to no internet)...
-	#os.system(command)
+	command = "sudo reboot"		#Kill the existing chromium process(that failed due to no internet)...
+	os.system(command)
 	
 	#this following block is supposed to close chrome, reconnect to the network, and reopen chrome. It only works when this program is run from a command line, not from PIinit.sh
-	command = "pkill -o chromium-browser"		#Kill the existing chromium process(that failed due to no internet)...
-	os.system(command)
-	command = "sudo systemctl daemon-reload"	#restart the network...
-	os.system(command)
-	command = "sudo systemctl restart dhcpcd"	#with these two commands.
-	os.system(command)
-	command = "DISPLAY=:0.0 chromium-browser --incognito --no-sandbox --disable-notifications --disable-infobars --start-fullscreen localhost/"		#and open a new one.
+	#command = "pkill -o chromium-browser"		#Kill the existing chromium process(that failed due to no internet)...
+	#os.system(command)
+	#command = "sudo systemctl daemon-reload"	#restart the network...
+	#os.system(command)
+	#command = "sudo systemctl restart dhcpcd"	#with these two commands.
+	#os.system(command)
+	#command = "DISPLAY=:0.0 chromium-browser --incognito --no-sandbox --disable-notifications --disable-infobars --start-fullscreen localhost/"		#and open a new one.
 	#time.sleep(2) #wait for the network to connect before reopening chrome
-	browser = subprocess.call(command, shell=True)
+	#browser = subprocess.call(command, shell=True)
 
 while True:                   
 	print("Waiting for connection on RFCOMM channel %d" % port)
