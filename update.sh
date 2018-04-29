@@ -15,5 +15,5 @@ sudo cp panel /home/pi/.config/lxpanel/LXDE-pi/panels/
 echo "Copying the panel file into /home/pi/.config/lxpanel/LXDE-pi/panels/ to remove the confirm BT pair prompt"
 sudo cp dbus-org.bluez.service /etc/systemd/system/
 echo "Copying dbus-org.bluez.service into /etc/systemd/system/ to run BT in comptability mode"
-sudo cp autostart /home/pi/.config/lxpanel/LXDE-pi/
-echo "Copying autostart into /home/pi/.config/lxpanel/LXDE-pi/ to boot chrome on startup"
+sudo cp autostart /home/pi/.config/lxsessions/LXDE-pi/
+echo "Copying autostart into /home/pi/.config/lxsessions/LXDE-pi/ to boot chrome on startup"
